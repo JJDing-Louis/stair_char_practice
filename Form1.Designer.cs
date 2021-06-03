@@ -29,13 +29,35 @@ namespace stair_char_practice
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btn_readfile = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btn_readfile
+            // 
+            this.btn_readfile.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_readfile.Location = new System.Drawing.Point(31, 32);
+            this.btn_readfile.Name = "btn_readfile";
+            this.btn_readfile.Size = new System.Drawing.Size(157, 74);
+            this.btn_readfile.TabIndex = 0;
+            this.btn_readfile.Text = "Read_File";
+            this.btn_readfile.UseVisualStyleBackColor = true;
+            this.btn_readfile.Click += new System.EventHandler(this.btn_readfile_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(218, 138);
+            this.Controls.Add(this.btn_readfile);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btn_readfile;
     }
 }
 
