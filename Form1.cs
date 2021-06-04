@@ -56,6 +56,7 @@ namespace stair_char_practice
             {
                 List<char[]> content_buffer = new List<char[]>();
                 string word = reader.ReadLine();
+                int a = word.Length;
                 while (!string.IsNullOrWhiteSpace(word))
                 {
                     char[] line = word.ToCharArray();
@@ -71,11 +72,14 @@ namespace stair_char_practice
 
             for (int y = 0; y < content.Length; y++)
             {
-                for (int x = 0; x < content[0].Length; x++)
-                {
-                    ans[y] = content[y][x];
-                }
+                ans[y] = content[y][y];
             }
+            StringBuilder sentence = new StringBuilder();
+            foreach (char item in ans)
+            {
+                sentence.Append(item);
+            }           
+            MessageBox.Show($"{sentence}，長度{sentence.Length}");
 
         }
 
