@@ -51,10 +51,34 @@ namespace stair_char_practice
 
         private void readfile(string path)
         {
+            char[][] content;
             using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
             {
-                reader.ReadLine();
+                List<char[]> content_buffer = new List<char[]>();
+                string word = reader.ReadLine();
+                while (!string.IsNullOrWhiteSpace(word))
+                {
+                    char[] line = word.ToCharArray();
+                    content_buffer.Add(line);
+                    word = reader.ReadLine();
+                }
+                content = content_buffer.ToArray();
             }
+            char[] ans = new char[54];
+            //MessageBox.Show($"{content.Length}");
+            //MessageBox.Show($"{content.Rank}");
+            //MessageBox.Show($"{content[0][1]}");
+
+            for (int y = 0; y < content.Length; y++)
+            {
+                for (int x = 0; x < content[0].Length; x++)
+                {
+                    ans[y] = content[y][x];
+                }
+            }
+
         }
+
+
     }
 }
