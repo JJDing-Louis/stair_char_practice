@@ -42,25 +42,24 @@ namespace stair_char_practice
                 }
             }
         }
-
+        /// <summary>
+        /// 開始讀檔
+        /// </summary>
+        /// <param name="path">輸入檔案路徑</param>
         private void readfile(string path)
         {
-            List<List<char>> content = new  List<List<char>>();
+            List<List<char>> content = new List<List<char>>();
             using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
             {
-                List<char[]> content_buffer = new List<char[]>();
-                List<char[]> content_buffer2 = new List<char[]>();
                 string word = reader.ReadLine();
-
-                int a = word.Length;
                 while (!string.IsNullOrWhiteSpace(word))
                 {
                     List<char> line1 = new List<char>();
                     char[] line = word.ToCharArray();
                     List<char> word1 = line.ToList();
-                    line1.AddRange(word1);
                     Array.Reverse(line);
                     List<char> word2 = line.ToList();
+                    line1.AddRange(word1);
                     word2.RemoveAt(0);
                     line1.AddRange(word2);
                     word1.RemoveAt(0);
@@ -71,14 +70,11 @@ namespace stair_char_practice
             }
             content.AddRange(content);
 
-
-
             StringBuilder sentence;
             string write_path = "D:\\Personal-Work-Space\\C# Project\\stair_char_practice\\ans\\ans.txt";
-            using (StreamWriter streamWriter = new StreamWriter(write_path,false, Encoding.UTF8))
+            using (StreamWriter streamWriter = new StreamWriter(write_path, false, Encoding.UTF8))
             {
-
-                //List<char> rule = new List<char>() {'%','^','@','#','*','='};
+                List<char> rule = new List<char>() { '%', '^', '@', '#', '*', '=' };
                 for (int y = 0; y < 54; y++)
                 {
                     for (int x = 0; x < 144; x++)
@@ -86,13 +82,10 @@ namespace stair_char_practice
                         List<char> ans = new List<char>();
                         for (int i = 0; i < 54; i++)
                         {
-                            ans.Add(content[y+i][x+i]);
+                            ans.Add(content[y + i][x + i]);
                         }
-                        //if(true)
                         if (ans[0].Equals('!') && ans[9].Equals('!')) //判定第1個條件
                         {
-                            if(true)
-
                             if (!(ans.Contains('%') || ans.Contains('^') || ans.Contains('+') || ans.Contains('@') || ans.Contains('#') || ans.Contains('*') || ans.Contains('=')))
                             {
                                 sentence = new StringBuilder();
@@ -102,10 +95,7 @@ namespace stair_char_practice
                                 }
                                 streamWriter.Write(sentence + "\n");
                             }
-
                         }
-
-
                     }
                 }
             }
