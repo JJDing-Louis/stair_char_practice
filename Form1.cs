@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace stair_char_practice
@@ -16,8 +12,7 @@ namespace stair_char_practice
         /// <summary>
         /// 讀檔路徑
         /// </summary>
-        string path; 
-
+        private string path;
 
         public Form1()
         {
@@ -45,44 +40,75 @@ namespace stair_char_practice
                     readfile(path);
                     //以上兩行可以整併
                 }
-
             }
         }
 
         private void readfile(string path)
         {
-            char[][] content;
+            List<List<char>> content = new  List<List<char>>();
             using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
             {
                 List<char[]> content_buffer = new List<char[]>();
+                List<char[]> content_buffer2 = new List<char[]>();
                 string word = reader.ReadLine();
+
                 int a = word.Length;
                 while (!string.IsNullOrWhiteSpace(word))
                 {
+                    List<char> line1 = new List<char>();
                     char[] line = word.ToCharArray();
-                    content_buffer.Add(line);
+                    List<char> word1 = line.ToList();
+                    line1.AddRange(word1);
+                    Array.Reverse(line);
+                    List<char> word2 = line.ToList();
+                    word2.RemoveAt(0);
+                    line1.AddRange(word2);
+                    word1.RemoveAt(0);
+                    line1.AddRange(word1);
+                    content.Add(line1);
                     word = reader.ReadLine();
                 }
-                content = content_buffer.ToArray();
             }
-            char[] ans = new char[54];
-            //MessageBox.Show($"{content.Length}");
-            //MessageBox.Show($"{content.Rank}");
-            //MessageBox.Show($"{content[0][1]}");
+            content.AddRange(content);
 
-            for (int y = 0; y < content.Length; y++)
+
+
+            StringBuilder sentence;
+            string write_path = "D:\\Personal-Work-Space\\C# Project\\stair_char_practice\\ans\\ans.txt";
+            using (StreamWriter streamWriter = new StreamWriter(write_path,false, Encoding.UTF8))
             {
-                ans[y] = content[y][y];
+
+                //List<char> rule = new List<char>() {'%','^','@','#','*','='};
+                for (int y = 0; y < 54; y++)
+                {
+                    for (int x = 0; x < 144; x++)
+                    {
+                        List<char> ans = new List<char>();
+                        for (int i = 0; i < 54; i++)
+                        {
+                            ans.Add(content[y+i][x+i]);
+                        }
+                        //if(true)
+                        if (ans[0].Equals('!') && ans[9].Equals('!')) //判定第1個條件
+                        {
+                            if(true)
+
+                            if (!(ans.Contains('%') || ans.Contains('^') || ans.Contains('+') || ans.Contains('@') || ans.Contains('#') || ans.Contains('*') || ans.Contains('=')))
+                            {
+                                sentence = new StringBuilder();
+                                foreach (char item in ans)
+                                {
+                                    sentence.Append(item);
+                                }
+                                streamWriter.Write(sentence + "\n");
+                            }
+
+                        }
+
+
+                    }
+                }
             }
-            StringBuilder sentence = new StringBuilder();
-            foreach (char item in ans)
-            {
-                sentence.Append(item);
-            }           
-            MessageBox.Show($"{sentence}，長度{sentence.Length}");
-
         }
-
-
     }
 }
